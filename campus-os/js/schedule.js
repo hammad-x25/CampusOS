@@ -48,7 +48,7 @@ if (schedulePage) {
 
     const friday = new Date(monday);
     friday.setDate(friday.getDate() + 4);
-    weekLabel.textContent = `${formatDate(monday)} â€“ ${formatDate(friday, true)}`;
+    weekLabel.textContent = `${formatDate(monday)} - ${formatDate(friday, true)}`;
     weekState.textContent = weekOffset === 0
       ? 'Current Week'
       : weekOffset < 0

@@ -26,6 +26,17 @@
   box-shadow: 0 20px 50px var(--shadow-color);
 }
 
+.sidebar::before {
+  position: absolute;
+  top: 0;
+  right: 22px;
+  left: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan-accent), transparent);
+  content: "";
+  opacity: 0.7;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -296,6 +307,8 @@
   gap: 20px;
   padding: 20px 32px;
   border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(90deg, rgba(8, 13, 28, 0.12), rgba(16, 24, 43, 0.2));
+  transition: background-color var(--transition-timing), border-color var(--transition-timing);
 }
 
 .topbar-heading {
@@ -434,6 +447,7 @@
 .page-content {
   flex: 1;
   padding: 46px 32px;
+  animation: campus-page-enter 420ms ease-out both;
 }
 
 .page-content h1 {

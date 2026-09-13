@@ -62,6 +62,7 @@ body {
   color: var(--text-primary);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
+  text-rendering: optimizeLegibility;
 }
 
 body::before {
@@ -74,6 +75,20 @@ body::before {
   background-size: 38px 38px;
   content: "";
   pointer-events: none;
+}
+
+/* A slow, low-contrast glow gives the shell depth without distracting from content. */
+body::after {
+  position: fixed;
+  z-index: 0;
+  inset: -18%;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(67, 217, 255, 0.08), transparent 24rem),
+    radial-gradient(circle at 82% 70%, rgba(155, 123, 255, 0.07), transparent 27rem);
+  content: "";
+  opacity: 0.36;
+  pointer-events: none;
+  animation: campus-background-glow 18s ease-in-out infinite alternate;
 }
 
 button,
@@ -110,4 +125,16 @@ a {
 :focus-visible {
   outline: 2px solid var(--cyan-accent);
   outline-offset: 3px;
+}
+
+/* Respect users who prefer less movement. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
