@@ -84,9 +84,126 @@
           </div>
         </header>
 
-        <main class="page-content">
-          <p class="page-kicker">CampusOS / Workspace</p>
-          <h1>Tasks</h1>
+        <main class="page-content tasks-content" data-task-page>
+          <section class="tasks-hero" aria-labelledby="tasks-heading">
+            <div>
+              <p class="page-kicker">CampusOS / Tasks</p>
+              <h1 id="tasks-heading">Task Command Center</h1>
+              <p class="tasks-subtitle">Keep every academic action visible and moving.</p>
+            </div>
+
+            <button class="new-task-button" data-open-task-modal type="button">
+              <span aria-hidden="true">+</span>
+              <span>New Task</span>
+            </button>
+          </section>
+
+          <section class="task-summary" aria-label="Task summary">
+            <div class="task-summary-item">
+              <strong data-summary-remaining>6</strong>
+              <span>Remaining</span>
+            </div>
+            <div class="task-summary-item summary-priority">
+              <strong data-summary-high>2</strong>
+              <span>High Priority</span>
+            </div>
+            <div class="task-summary-item summary-completed">
+              <strong data-summary-completed>4</strong>
+              <span>Completed</span>
+            </div>
+          </section>
+
+          <section class="task-tools" aria-label="Search and filter tasks">
+            <label class="task-search">
+              <span class="search-mark" aria-hidden="true"></span>
+              <span class="visually-hidden">Search tasks by title or course</span>
+              <input data-task-search type="search" placeholder="Search tasks or courses" autocomplete="off">
+            </label>
+
+            <div class="task-filters" role="group" aria-label="Filter tasks">
+              <button class="task-filter is-active" data-task-filter="all" type="button" aria-pressed="true">All</button>
+              <button class="task-filter" data-task-filter="pending" type="button" aria-pressed="false">Pending</button>
+              <button class="task-filter" data-task-filter="completed" type="button" aria-pressed="false">Completed</button>
+              <button class="task-filter" data-task-filter="high" type="button" aria-pressed="false">High Priority</button>
+            </div>
+
+            <p class="task-result-summary" data-task-result>Showing 10 tasks</p>
+          </section>
+
+          <section aria-labelledby="task-list-heading">
+            <div class="task-section-heading">
+              <div>
+                <p class="panel-kicker">Action queue</p>
+                <h2 id="task-list-heading">Your Tasks</h2>
+              </div>
+              <span class="panel-tag">Live workspace</span>
+            </div>
+
+            <div class="task-list" data-task-list aria-live="polite"></div>
+            <p class="task-empty-state" data-task-empty hidden>No tasks match the current search or filter.</p>
+          </section>
+
+          <div class="task-modal" data-task-modal hidden aria-hidden="true">
+            <div class="task-modal-overlay" data-task-modal-close></div>
+            <section class="task-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="task-modal-heading">
+              <button class="task-modal-close" data-task-modal-close type="button" aria-label="Close task form">×</button>
+              <p class="task-modal-kicker">Task workspace</p>
+              <h2 id="task-modal-heading" data-task-modal-heading>New Task</h2>
+
+              <form class="task-form" data-task-form novalidate>
+                <input data-task-id type="hidden">
+
+                <div class="form-field">
+                  <label for="task-title">Task Title</label>
+                  <input id="task-title" data-task-title type="text" placeholder="e.g. Complete wireframe review" aria-describedby="task-title-error">
+                  <p class="form-error" id="task-title-error" data-error-for="title"></p>
+                </div>
+
+                <div class="form-field">
+                  <label for="task-course">Course</label>
+                  <select id="task-course" data-task-course aria-describedby="task-course-error">
+                    <option value="">Select a course</option>
+                    <option value="Web Technologies">Web Technologies</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Database Systems">Database Systems</option>
+                    <option value="Human Computer Interaction">Human Computer Interaction</option>
+                    <option value="Operating Systems">Operating Systems</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                  </select>
+                  <p class="form-error" id="task-course-error" data-error-for="course"></p>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="task-deadline">Deadline</label>
+                    <input id="task-deadline" data-task-deadline type="date" aria-describedby="task-deadline-error">
+                    <p class="form-error" id="task-deadline-error" data-error-for="deadline"></p>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="task-priority">Priority</label>
+                    <select id="task-priority" data-task-priority aria-describedby="task-priority-error">
+                      <option value="">Select priority</option>
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                    <p class="form-error" id="task-priority-error" data-error-for="priority"></p>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label for="task-description">Description</label>
+                  <textarea id="task-description" data-task-description rows="3" placeholder="Add a short note about this task"></textarea>
+                </div>
+
+                <div class="task-form-actions">
+                  <button class="task-cancel-button" data-task-modal-close type="button">Cancel</button>
+                  <button class="task-submit-button" data-task-submit type="submit">Add Task</button>
+                </div>
+              </form>
+            </section>
+          </div>
         </main>
 
         <footer class="app-footer">
