@@ -84,9 +84,132 @@
           </div>
         </header>
 
-        <main class="page-content">
-          <p class="page-kicker">CampusOS / Workspace</p>
-          <h1>Schedule</h1>
+        <main class="page-content schedule-content" data-schedule-page>
+          <section class="schedule-hero" aria-labelledby="schedule-heading">
+            <div>
+              <p class="page-kicker">CampusOS / Schedule</p>
+              <h1 id="schedule-heading">Weekly Schedule</h1>
+              <p class="schedule-subtitle">Your academic timeline.</p>
+            </div>
+
+            <div class="week-controls" aria-label="Change displayed week">
+              <button class="week-button" data-week-change="-1" type="button">← <span>Previous Week</span></button>
+              <div class="week-label">
+                <span data-week-state>Current Week</span>
+                <strong data-week-label>Loading week</strong>
+              </div>
+              <button class="week-button" data-week-change="1" type="button"><span>Next Week</span> →</button>
+            </div>
+          </section>
+
+          <nav class="weekday-tabs" role="tablist" aria-label="Choose a weekday">
+            <button class="weekday-tab" role="tab" data-day-tab="monday" type="button" aria-selected="false">
+              <span>Monday</span><small data-day-date="monday">--</small>
+            </button>
+            <button class="weekday-tab" role="tab" data-day-tab="tuesday" type="button" aria-selected="false">
+              <span>Tuesday</span><small data-day-date="tuesday">--</small>
+            </button>
+            <button class="weekday-tab" role="tab" data-day-tab="wednesday" type="button" aria-selected="false">
+              <span>Wednesday</span><small data-day-date="wednesday">--</small>
+            </button>
+            <button class="weekday-tab" role="tab" data-day-tab="thursday" type="button" aria-selected="false">
+              <span>Thursday</span><small data-day-date="thursday">--</small>
+            </button>
+            <button class="weekday-tab" role="tab" data-day-tab="friday" type="button" aria-selected="false">
+              <span>Friday</span><small data-day-date="friday">--</small>
+            </button>
+          </nav>
+
+          <section class="schedule-board" aria-label="Weekly class timetable">
+            <div class="calendar-head">
+              <div class="calendar-corner"><span>TIME</span></div>
+              <div class="day-heading" data-day-heading="monday"><span>MON</span></div>
+              <div class="day-heading" data-day-heading="tuesday"><span>TUE</span></div>
+              <div class="day-heading" data-day-heading="wednesday"><span>WED</span></div>
+              <div class="day-heading" data-day-heading="thursday"><span>THU</span></div>
+              <div class="day-heading" data-day-heading="friday"><span>FRI</span></div>
+            </div>
+
+            <div class="calendar-body">
+              <div class="time-column" aria-hidden="true">
+                <span>08:00</span>
+                <span>09:00</span>
+                <span>10:00</span>
+                <span>11:00</span>
+                <span>12:00</span>
+                <span>01:00</span>
+                <span>02:00</span>
+                <span>03:00</span>
+                <span>04:00</span>
+              </div>
+
+              <div class="day-column" data-day-column="monday">
+                <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
+                <button class="class-block class-accent-cyan" data-class-open type="button" style="--class-top: 74px; --class-height: 110px" data-class-title="Web Technologies" data-class-code="CS-312" data-class-time="09:00 AM — 10:30 AM" data-class-room="Room CS-301" data-class-instructor="Dr. Noman Shafi" data-class-topic="JavaScript DOM Manipulation" data-class-attendance="9 / 10 classes">
+                  <span class="class-block-time">09:00 AM</span><strong>Web Technologies</strong><span>Room CS-301</span><small>NS</small>
+                </button>
+                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 370px; --class-height: 74px" data-class-title="Software Engineering" data-class-code="CS-410" data-class-time="01:00 PM — 02:00 PM" data-class-room="Room SE-110" data-class-instructor="Dr. Hamza Raza" data-class-topic="Agile sprint planning" data-class-attendance="8 / 10 classes">
+                  <span class="class-block-time">01:00 PM</span><strong>Software Engineering</strong><span>Room SE-110</span><small>HR</small>
+                </button>
+              </div>
+
+              <div class="day-column" data-day-column="tuesday">
+                <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
+                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 222px; --class-height: 110px" data-class-title="Artificial Intelligence" data-class-code="CS-421" data-class-time="11:00 AM — 12:30 PM" data-class-room="AI Lab" data-class-instructor="Dr. Amina Khan" data-class-topic="Heuristic search strategies" data-class-attendance="9 / 10 classes">
+                  <span class="class-block-time">11:00 AM</span><strong>Artificial Intelligence</strong><span>AI Lab</span><small>AK</small>
+                </button>
+                <button class="class-block class-accent-warning" data-class-open type="button" style="--class-top: 444px; --class-height: 110px" data-class-title="Human Computer Interaction" data-class-code="CS-318" data-class-time="02:00 PM — 03:30 PM" data-class-room="Design Studio 2" data-class-instructor="Ms. Sara Malik" data-class-topic="Usability testing methods" data-class-attendance="8 / 10 classes">
+                  <span class="class-block-time">02:00 PM</span><strong>Human Computer Interaction</strong><span>Design Studio 2</span><small>SM</small>
+                </button>
+              </div>
+
+              <div class="day-column" data-day-column="wednesday">
+                <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
+                <button class="class-block class-accent-success" data-class-open type="button" style="--class-top: 148px; --class-height: 110px" data-class-title="Database Systems" data-class-code="CS-305" data-class-time="10:00 AM — 11:30 AM" data-class-room="Room CS-205" data-class-instructor="Prof. Farhan Ali" data-class-topic="Query optimization" data-class-attendance="10 / 10 classes">
+                  <span class="class-block-time">10:00 AM</span><strong>Database Systems</strong><span>Room CS-205</span><small>FA</small>
+                </button>
+                <button class="class-block class-accent-cyan" data-class-open type="button" style="--class-top: 444px; --class-height: 146px" data-class-title="Operating Systems" data-class-code="CS-401" data-class-time="02:00 PM — 04:00 PM" data-class-room="Room CS-402" data-class-instructor="Dr. Bilal Ahmed" data-class-topic="Process scheduling" data-class-attendance="8 / 10 classes">
+                  <span class="class-block-time">02:00 PM</span><strong>Operating Systems</strong><span>Room CS-402</span><small>BA</small>
+                </button>
+              </div>
+
+              <div class="day-column" data-day-column="thursday">
+                <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
+                <button class="class-block class-accent-cyan" data-class-open type="button" style="--class-top: 0px; --class-height: 74px" data-class-title="Web Technologies" data-class-code="CS-312" data-class-time="08:00 AM — 09:00 AM" data-class-room="Web Lab 1" data-class-instructor="Dr. Noman Shafi" data-class-topic="Responsive layout lab" data-class-attendance="9 / 10 classes">
+                  <span class="class-block-time">08:00 AM</span><strong>Web Technologies</strong><span>Web Lab 1</span><small>NS</small>
+                </button>
+                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 370px; --class-height: 74px" data-class-title="Artificial Intelligence" data-class-code="CS-421" data-class-time="01:00 PM — 02:00 PM" data-class-room="Room AI-204" data-class-instructor="Dr. Amina Khan" data-class-topic="Knowledge representation" data-class-attendance="9 / 10 classes">
+                  <span class="class-block-time">01:00 PM</span><strong>Artificial Intelligence</strong><span>Room AI-204</span><small>AK</small>
+                </button>
+              </div>
+
+              <div class="day-column" data-day-column="friday">
+                <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
+                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 148px; --class-height: 110px" data-class-title="Software Engineering" data-class-code="CS-410" data-class-time="10:00 AM — 11:30 AM" data-class-room="Room SE-110" data-class-instructor="Dr. Hamza Raza" data-class-topic="Software requirements" data-class-attendance="8 / 10 classes">
+                  <span class="class-block-time">10:00 AM</span><strong>Software Engineering</strong><span>Room SE-110</span><small>HR</small>
+                </button>
+                <button class="class-block class-accent-success" data-class-open type="button" style="--class-top: 518px; --class-height: 74px" data-class-title="Database Systems" data-class-code="CS-305" data-class-time="03:00 PM — 04:00 PM" data-class-room="Room CS-205" data-class-instructor="Prof. Farhan Ali" data-class-topic="Transactions and recovery" data-class-attendance="10 / 10 classes">
+                  <span class="class-block-time">03:00 PM</span><strong>Database Systems</strong><span>Room CS-205</span><small>FA</small>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <div class="schedule-modal" data-schedule-modal hidden aria-hidden="true">
+            <div class="schedule-modal-overlay" data-schedule-modal-close></div>
+            <section class="schedule-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="class-modal-title">
+              <button class="schedule-modal-close" data-schedule-modal-close type="button" aria-label="Close class details">×</button>
+              <p class="schedule-modal-code" data-class-modal-code>CS-312</p>
+              <h2 id="class-modal-title" data-class-modal-title>Web Technologies</h2>
+              <div class="class-modal-time" data-class-modal-time>09:00 AM — 10:30 AM</div>
+              <dl class="class-modal-details">
+                <div><dt>Room</dt><dd data-class-modal-room>Room CS-301</dd></div>
+                <div><dt>Instructor</dt><dd data-class-modal-instructor>Dr. Noman Shafi</dd></div>
+              </dl>
+              <div class="class-modal-topic"><span>Next Topic</span><strong data-class-modal-topic>JavaScript DOM Manipulation</strong></div>
+              <div class="class-modal-attendance"><span>Attendance</span><strong data-class-modal-attendance>9 / 10 classes</strong></div>
+            </section>
+          </div>
         </main>
 
         <footer class="app-footer">
