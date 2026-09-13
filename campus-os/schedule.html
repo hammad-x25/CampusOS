@@ -9,7 +9,10 @@
   </head>
   <body data-page="schedule">
     <div class="app-shell">
-      <aside class="sidebar" aria-label="CampusOS sidebar">
+      <aside class="sidebar" id="campus-sidebar" data-sidebar aria-label="CampusOS sidebar">
+        <button class="sidebar-close" data-sidebar-close type="button" aria-label="Close navigation">
+          <span class="close-mark" aria-hidden="true"></span>
+        </button>
         <a class="brand" href="index.html" aria-label="CampusOS overview">
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-word">CAMPUS<span>.OS</span></span>
@@ -56,8 +59,13 @@
         </div>
       </aside>
 
+      <button class="sidebar-overlay" data-sidebar-overlay type="button" aria-label="Close navigation" aria-hidden="true" tabindex="-1"></button>
+
       <div class="app-frame">
         <header class="topbar">
+          <button class="mobile-menu-button" data-sidebar-open type="button" aria-label="Open navigation" aria-controls="campus-sidebar" aria-expanded="false">
+            <span class="hamburger-mark" aria-hidden="true"></span>
+          </button>
           <div class="topbar-heading">
             <span class="topbar-overline">Campus workspace</span>
             <span class="page-label" data-page-label>Schedule</span>
