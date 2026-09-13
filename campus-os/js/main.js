@@ -35,3 +35,16 @@ pageLinks.forEach((link) => {
     pageLabel.textContent = link.textContent.trim();
   }
 });
+
+const greeting = document.querySelector('[data-greeting]');
+
+if (greeting) {
+  const currentHour = new Date().getHours();
+  const greetingText = currentHour < 12
+    ? 'Good Morning'
+    : currentHour < 18
+      ? 'Good Afternoon'
+      : 'Good Evening';
+
+  greeting.textContent = greetingText;
+}
