@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/utils.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/theme.js" defer></script>
+    <script src="js/personalization.js" defer></script>
     <script src="js/navigation.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/command-palette.js" defer></script>
+    <script src="js/focus.js" defer></script>
+    <script src="js/notifications.js" defer></script>
     <script src="js/tasks.js" defer></script>
   </head>
   <body data-page="tasks">
@@ -50,15 +58,15 @@
         </nav>
 
         <div class="sidebar-bottom">
-          <button class="sidebar-action" type="button">
+          <button class="sidebar-action" data-settings-open type="button">
             <span class="settings-mark" aria-hidden="true"></span>
             <span>Settings</span>
           </button>
 
           <div class="profile-preview">
-            <span class="profile-avatar" aria-hidden="true">AS</span>
+            <span class="profile-avatar" aria-hidden="true">JS</span>
             <span class="profile-copy">
-              <strong>Alex Student</strong>
+              <strong>John Student</strong>
               <span>Undergraduate</span>
             </span>
             <span class="online-indicator" aria-label="Online"></span>
@@ -79,13 +87,13 @@
           </div>
 
           <div class="topbar-actions">
-            <label class="search-field">
+            <label class="search-field" data-universal-search-trigger>
               <span class="visually-hidden">Search CampusOS</span>
               <span class="search-mark" aria-hidden="true"></span>
-              <input type="search" placeholder="Search workspace" autocomplete="off">
+              <input data-universal-search type="search" placeholder="Search workspace" aria-label="Search CampusOS" autocomplete="off">
             </label>
 
-            <button class="notification-button" type="button" aria-label="View notifications">
+            <button class="notification-button" data-notification-toggle type="button" aria-label="View notifications">
               <span>Notifications</span>
               <span class="notification-dot" aria-hidden="true"></span>
             </button>
@@ -95,7 +103,7 @@
               <span data-theme-label>Dark mode</span>
             </button>
 
-            <button class="top-avatar" type="button" aria-label="Open user profile">AS</button>
+            <button class="top-avatar" type="button" aria-label="Open user profile">JS</button>
           </div>
         </header>
 

@@ -3,9 +3,10 @@
 // ========================
 
 const taskPage = document.querySelector('[data-task-page]');
+const taskCampus = window.CampusOS || (window.CampusOS = {});
 
 if (taskPage) {
-  const TASKS_STORAGE_KEY = 'campus-tasks';
+  const TASKS_STORAGE_KEY = taskCampus.storageKeys.tasks;
   const defaultTasks = [
     {
       id: 1,
@@ -140,6 +141,7 @@ if (taskPage) {
 
   function saveTasks() {
     localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
+    taskCampus.utils.markLocalSave();
   }
 
   function formatDeadline(deadline) {

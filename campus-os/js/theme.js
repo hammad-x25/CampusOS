@@ -5,7 +5,9 @@
 const root = document.documentElement;
 const themeToggle = document.querySelector('[data-theme-toggle]');
 const themeLabel = document.querySelector('[data-theme-label]');
-const savedTheme = localStorage.getItem('campus-theme');
+const themeCampus = window.CampusOS || (window.CampusOS = {});
+const themeStorageKey = themeCampus.storageKeys.theme;
+const savedTheme = localStorage.getItem(themeStorageKey);
 
 function applyTheme(theme) {
   const isLightTheme = theme === 'light';
@@ -21,7 +23,8 @@ applyTheme(savedTheme === 'light' ? 'light' : 'dark');
 themeToggle.addEventListener('click', () => {
   const nextTheme = root.dataset.theme === 'light' ? 'dark' : 'light';
 
-  localStorage.setItem('campus-theme', nextTheme);
+  localStorage.setItem(themeStorageKey, nextTheme);
+  themeCampus.utils.markLocalSave();
   applyTheme(nextTheme);
 });
 

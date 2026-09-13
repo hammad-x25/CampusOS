@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/utils.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/theme.js" defer></script>
+    <script src="js/personalization.js" defer></script>
     <script src="js/navigation.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/command-palette.js" defer></script>
+    <script src="js/focus.js" defer></script>
+    <script src="js/notifications.js" defer></script>
     <script src="js/analytics.js" defer></script>
   </head>
   <body data-page="analytics">
@@ -50,15 +58,15 @@
         </nav>
 
         <div class="sidebar-bottom">
-          <button class="sidebar-action" type="button">
+          <button class="sidebar-action" data-settings-open type="button">
             <span class="settings-mark" aria-hidden="true"></span>
             <span>Settings</span>
           </button>
 
           <div class="profile-preview">
-            <span class="profile-avatar" aria-hidden="true">AS</span>
+            <span class="profile-avatar" aria-hidden="true">JS</span>
             <span class="profile-copy">
-              <strong>Alex Student</strong>
+              <strong>John Student</strong>
               <span>Undergraduate</span>
             </span>
             <span class="online-indicator" aria-label="Online"></span>
@@ -79,13 +87,13 @@
           </div>
 
           <div class="topbar-actions">
-            <label class="search-field">
+            <label class="search-field" data-universal-search-trigger>
               <span class="visually-hidden">Search CampusOS</span>
               <span class="search-mark" aria-hidden="true"></span>
-              <input type="search" placeholder="Search workspace" autocomplete="off">
+              <input data-universal-search type="search" placeholder="Search workspace" aria-label="Search CampusOS" autocomplete="off">
             </label>
 
-            <button class="notification-button" type="button" aria-label="View notifications">
+            <button class="notification-button" data-notification-toggle type="button" aria-label="View notifications">
               <span>Notifications</span>
               <span class="notification-dot" aria-hidden="true"></span>
             </button>
@@ -95,7 +103,7 @@
               <span data-theme-label>Dark mode</span>
             </button>
 
-            <button class="top-avatar" type="button" aria-label="Open user profile">AS</button>
+            <button class="top-avatar" type="button" aria-label="Open user profile">JS</button>
           </div>
         </header>
 
@@ -367,6 +375,85 @@
                             <div class="performance-bar" role="progressbar" aria-label="Operating Systems performance" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"><span style="width: 78%"></span></div>
                         </div>
                     </div>
+                </section>
+            </div>
+
+            <div class="advanced-analytics-grid">
+                <section class="analytics-panel forecast-panel" id="forecast" data-forecast-panel aria-labelledby="forecast-heading">
+                    <div class="analytics-panel-heading">
+                        <div>
+                            <p class="panel-kicker">WHAT-IF SIMULATOR</p>
+                            <h2 id="forecast-heading">GPA Forecast</h2>
+                            <p class="panel-description">Explore possible outcomes without changing your current grades.</p>
+                        </div>
+                        <span class="panel-index">04</span>
+                    </div>
+                    <div class="scenario-buttons" role="group" aria-label="GPA forecast scenarios">
+                        <button class="scenario-button is-active" data-forecast-scenario="expected" type="button">Expected</button>
+                        <button class="scenario-button" data-forecast-scenario="conservative" type="button">Conservative</button>
+                        <button class="scenario-button" data-forecast-scenario="best" type="button">Best Case</button>
+                    </div>
+                    <div class="forecast-course-list" data-forecast-courses></div>
+                    <div class="forecast-summary" aria-live="polite">
+                        <div class="forecast-summary__item"><span>Current GPA</span><strong data-forecast-current>3.74</strong></div>
+                        <div class="forecast-summary__item"><span>Projected GPA</span><strong data-forecast-projected>3.74</strong></div>
+                        <div class="forecast-summary__item change"><span>Change</span><strong data-forecast-change>+0.00</strong></div>
+                    </div>
+                    <div class="forecast-meter" aria-label="Projected GPA position on a 2.5 to 4.0 scale">
+                        <div class="forecast-meter__scale"><span class="forecast-meter__marker" data-forecast-marker></span></div>
+                        <div class="forecast-meter__labels"><span>2.5</span><strong data-forecast-meter-label>3.74</strong><span>4.0</span></div>
+                    </div>
+                    <p class="forecast-message" data-forecast-message>If these grades are achieved, your semester GPA would remain stable.</p>
+                </section>
+
+                <section class="analytics-panel attendance-risk-panel" id="attendance-risk" data-attendance-risk-panel aria-labelledby="attendance-risk-heading">
+                    <div class="analytics-panel-heading">
+                        <div>
+                            <p class="panel-kicker">SIMULATION</p>
+                            <h2 id="attendance-risk-heading">Attendance Risk</h2>
+                            <p class="panel-description">Test the next class without changing your saved attendance data.</p>
+                        </div>
+                        <span class="panel-index">05</span>
+                    </div>
+                    <div class="attendance-zone-legend"><span class="zone-safe">SAFE 85–100%</span><span class="zone-caution">CAUTION 75–84%</span><span class="zone-risk">RISK BELOW 75%</span></div>
+                    <div class="attendance-risk-list" data-attendance-risk-list></div>
+                </section>
+
+                <section class="analytics-panel skill-map-panel" data-skill-map-panel aria-labelledby="skill-map-heading">
+                    <div class="analytics-panel-heading">
+                        <div>
+                            <p class="panel-kicker">SEMESTER 5 / SKILLS</p>
+                            <h2 id="skill-map-heading">Academic Skill Map</h2>
+                            <p class="panel-description">A visual summary of the capabilities developed across your courses.</p>
+                        </div>
+                        <span class="panel-index">06</span>
+                    </div>
+                    <label class="skill-course-select">Highlight course<select data-skill-course-select aria-label="Highlight course skills"></select></label>
+                    <div class="skill-map-layout">
+                        <svg class="skill-radar" viewBox="0 0 240 240" role="img" aria-label="Academic skill map">
+                            <polygon points="120,35 193,77 193,163 120,205 47,163 47,77"></polygon>
+                            <polygon points="120,62 170,91 170,149 120,178 70,149 70,91"></polygon>
+                            <polygon points="120,89 147,104 147,135 120,151 93,135 93,104"></polygon>
+                            <line x1="120" y1="120" x2="120" y2="35"></line><line x1="120" y1="120" x2="193" y2="77"></line><line x1="120" y1="120" x2="193" y2="163"></line><line x1="120" y1="120" x2="120" y2="205"></line><line x1="120" y1="120" x2="47" y2="163"></line><line x1="120" y1="120" x2="47" y2="77"></line>
+                            <polygon class="skill-radar__area" data-skill-area points="120,45 178,86 183,157 120,187 62,154 58,84"></polygon>
+                            <text x="120" y="23">Programming</text><text x="207" y="72">Problem Solving</text><text x="207" y="171">Design</text><text x="120" y="224">Databases</text><text x="32" y="171">Systems</text><text x="32" y="72">Communication</text>
+                        </svg>
+                        <div class="skill-list" data-skill-list></div>
+                    </div>
+                </section>
+
+                <section class="analytics-panel degree-panel" aria-labelledby="degree-heading">
+                    <div class="analytics-panel-heading">
+                        <div>
+                            <p class="panel-kicker">DEGREE ROADMAP</p>
+                            <h2 id="degree-heading">Semester Progress Matrix</h2>
+                            <p class="panel-description">A visual roadmap of completed, current, and upcoming study milestones.</p>
+                        </div>
+                        <span class="panel-index">07</span>
+                    </div>
+                    <div class="degree-progress-summary"><strong>72 / 130</strong><span>completed credits</span><div class="degree-progress-track"><span style="width: 55%"></span></div></div>
+                    <div class="degree-matrix" data-degree-matrix></div>
+                    <div class="degree-legend"><span>✓ Completed</span><span>◉ Current</span><span>○ Upcoming</span></div>
                 </section>
             </div>
         </main>

@@ -450,6 +450,11 @@
   font-weight: 650;
 }
 
+.modal-assessment small {
+  color: var(--text-secondary);
+  font-size: 0.62rem;
+}
+
 .schedule-content {
   padding-top: 38px;
   padding-bottom: 44px;

@@ -3,6 +3,7 @@
 // ========================
 
 const analyticsPage = document.querySelector('[data-analytics-page]');
+const analyticsCampus = window.CampusOS || (window.CampusOS = {});
 
 if (analyticsPage) {
   const gradePoints = {
@@ -29,6 +30,27 @@ if (analyticsPage) {
   const attendancePercentage = analyticsPage.querySelector('[data-attendance-percentage]');
   const attendanceStatus = analyticsPage.querySelector('[data-attendance-status]');
   const attendanceMessage = analyticsPage.querySelector('[data-attendance-message]');
+  const forecastCourseList = analyticsPage.querySelector('[data-forecast-courses]');
+  const forecastScenarioButtons = analyticsPage.querySelectorAll('[data-forecast-scenario]');
+  const forecastCurrent = analyticsPage.querySelector('[data-forecast-current]');
+  const forecastProjected = analyticsPage.querySelector('[data-forecast-projected]');
+  const forecastChange = analyticsPage.querySelector('[data-forecast-change]');
+  const forecastMarker = analyticsPage.querySelector('[data-forecast-marker]');
+  const forecastMeterLabel = analyticsPage.querySelector('[data-forecast-meter-label]');
+  const forecastMessage = analyticsPage.querySelector('[data-forecast-message]');
+  const attendanceRiskList = analyticsPage.querySelector('[data-attendance-risk-list]');
+  const skillCourseSelect = analyticsPage.querySelector('[data-skill-course-select]');
+  const skillArea = analyticsPage.querySelector('[data-skill-area]');
+  const skillList = analyticsPage.querySelector('[data-skill-list]');
+  const degreeMatrix = analyticsPage.querySelector('[data-degree-matrix]');
+  const forecastCourses = campusCoursesForForecast();
+  let expectedGrades = {};
+  let simulatedAttendance = {};
+  let selectedSkillCourse = '';
+
+  function campusCoursesForForecast() {
+    return window.CampusOS?.data?.courses?.slice(0, 5) || [];
+  }
 
   function calculateGPA() {
     const rows = analyticsPage.querySelectorAll('[data-gpa-row]');
@@ -138,6 +160,228 @@ if (analyticsPage) {
     }
   }
 
+  // ========================
+  // GPA Forecast Simulator
+  // ========================
+
+  function getLowerGrade(grade) {
+    const gradeOrder = Object.keys(gradePoints);
+    const gradeIndex = gradeOrder.indexOf(grade);
+    return gradeOrder[Math.min(gradeOrder.length - 1, gradeIndex + 1)];
+  }
+
+  function getScenarioGrades(scenario) {
+    return forecastCourses.reduce((grades, course) => {
+      grades[course.id] = scenario === 'best'
+        ? 'A'
+        : scenario === 'conservative'
+          ? getLowerGrade(course.currentGrade)
+          : course.currentGrade;
+      return grades;
+    }, {});
+  }
+
+  function calculateForecastGPA(grades) {
+    let credits = 0;
+    let qualityPoints = 0;
+
+    forecastCourses.forEach((course) => {
+      credits += course.credits;
+      qualityPoints += (gradePoints[grades[course.id]] || 0) * course.credits;
+    });
+
+    return credits ? qualityPoints / credits : 0;
+  }
+
+  function renderForecastCourses() {
+    forecastCourseList.innerHTML = '';
+
+    forecastCourses.forEach((course) => {
+      const row = document.createElement('div');
+      const gradeSelect = document.createElement('select');
+      row.className = 'forecast-course-row';
+      gradeSelect.className = 'forecast-select';
+      gradeSelect.dataset.forecastCourse = course.id;
+      gradeSelect.setAttribute('aria-label', `Expected final grade for ${course.title}`);
+      gradeSelect.innerHTML = createGradeOptions(expectedGrades[course.id]);
+      row.innerHTML = `<div><strong class="forecast-course-row__title"></strong><span class="forecast-course-row__grade">Current grade: ${course.currentGrade}</span></div>`;
+      row.appendChild(gradeSelect);
+      row.querySelector('.forecast-course-row__title').textContent = course.title;
+      gradeSelect.addEventListener('change', () => {
+        expectedGrades[course.id] = gradeSelect.value;
+        forecastScenarioButtons.forEach((button) => button.classList.remove('is-active'));
+        updateForecastSummary();
+      });
+      forecastCourseList.appendChild(row);
+    });
+  }
+
+  function updateForecastSummary() {
+    const currentGpaValue = calculateForecastGPA(getScenarioGrades('expected'));
+    const projectedGpaValue = calculateForecastGPA(expectedGrades);
+    const changeValue = projectedGpaValue - currentGpaValue;
+    const markerPosition = Math.min(100, Math.max(0, ((projectedGpaValue - 2.5) / 1.5) * 100));
+
+    forecastCurrent.textContent = currentGpaValue.toFixed(2);
+    forecastProjected.textContent = projectedGpaValue.toFixed(2);
+    forecastChange.textContent = `${changeValue >= 0 ? '+' : ''}${changeValue.toFixed(2)}`;
+    forecastMarker.style.setProperty('--forecast-position', `${markerPosition}%`);
+    forecastMeterLabel.textContent = projectedGpaValue.toFixed(2);
+
+    if (Math.abs(changeValue) < 0.005) {
+      forecastMessage.textContent = 'If these grades are achieved, your semester GPA would remain stable.';
+    } else if (changeValue > 0) {
+      forecastMessage.textContent = `If these grades are achieved, your semester GPA would increase by approximately ${changeValue.toFixed(2)}.`;
+    } else {
+      forecastMessage.textContent = `If these grades are achieved, your semester GPA would decrease by approximately ${Math.abs(changeValue).toFixed(2)}.`;
+    }
+  }
+
+  function applyForecastScenario(scenario) {
+    expectedGrades = getScenarioGrades(scenario);
+    forecastScenarioButtons.forEach((button) => button.classList.toggle('is-active', button.dataset.forecastScenario === scenario));
+    renderForecastCourses();
+    updateForecastSummary();
+  }
+
+  // ========================
+  // Attendance Risk Simulator
+  // ========================
+
+  function getAttendancePercentage(attended, total) {
+    return total ? Math.min(100, (attended / total) * 100) : 0;
+  }
+
+  function getAttendanceStatus(percentage) {
+    if (percentage >= 85) return { label: 'SAFE', className: 'safe' };
+    if (percentage >= 75) return { label: 'WARNING', className: 'warning' };
+    return { label: 'AT RISK', className: 'at-risk' };
+  }
+
+  function getAttendanceGuidance(course) {
+    const percentage = getAttendancePercentage(course.attendance.attended, course.attendance.total);
+    const requiredRatio = 0.75;
+
+    if (percentage >= 75) {
+      const safeToMiss = Math.max(0, Math.floor((course.attendance.attended / requiredRatio) - course.attendance.total + 0.000001));
+      return `Safe to miss: ${safeToMiss} class${safeToMiss === 1 ? '' : 'es'}`;
+    }
+
+    const recoveryClasses = Math.max(1, Math.ceil(((requiredRatio * course.attendance.total) - course.attendance.attended) / (1 - requiredRatio)));
+    return `Recovery: attend the next ${recoveryClasses} class${recoveryClasses === 1 ? '' : 'es'} to reach 75%`;
+  }
+
+  function createAttendanceRiskItem(course) {
+    const currentPercentage = getAttendancePercentage(course.attendance.attended, course.attendance.total);
+    const attendPercentage = getAttendancePercentage(course.attendance.attended + 1, course.attendance.total + 1);
+    const missPercentage = getAttendancePercentage(course.attendance.attended, course.attendance.total + 1);
+    const status = getAttendanceStatus(currentPercentage);
+    const simulation = simulatedAttendance[course.id];
+    const item = document.createElement('article');
+    item.className = `attendance-risk-item risk-${status.className}`;
+    item.innerHTML = `
+      <div class="attendance-risk-item__heading"><strong></strong><span class="risk-status"></span></div>
+      <div class="attendance-risk-item__metrics"><span>Current <strong>${currentPercentage.toFixed(1)}%</strong></span><span>If Attend <strong>${attendPercentage.toFixed(1)}%</strong></span><span>If Miss <strong>${missPercentage.toFixed(1)}%</strong></span></div>
+      <div class="attendance-risk-item__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${currentPercentage.toFixed(1)}"><span style="--attendance-width: ${currentPercentage}%"></span></div>
+      <div class="attendance-risk-item__actions"><button class="simulator-button" data-attendance-action="attend" data-course-id="${course.id}" type="button">Attend Next Class</button><button class="simulator-button" data-attendance-action="miss" data-course-id="${course.id}" type="button">Miss Next Class</button></div>
+      <p class="attendance-risk-item__message"></p>
+    `;
+    item.querySelector('.attendance-risk-item__heading strong').textContent = course.title;
+    item.querySelector('.risk-status').textContent = `${status.label} · ${course.attendance.attended} / ${course.attendance.total}`;
+    item.querySelector('.attendance-risk-item__message').textContent = simulation === 'attend'
+      ? `Simulation: attending next class raises attendance to ${attendPercentage.toFixed(1)}%.`
+      : simulation === 'miss'
+        ? `Simulation: missing next class lowers attendance to ${missPercentage.toFixed(1)}%.`
+        : getAttendanceGuidance(course);
+    item.querySelectorAll('[data-attendance-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        simulatedAttendance[button.dataset.courseId] = button.dataset.attendanceAction;
+        renderAttendanceRisk();
+      });
+    });
+    return item;
+  }
+
+  function renderAttendanceRisk() {
+    attendanceRiskList.innerHTML = '';
+    analyticsCampus.data.courses.forEach((course) => attendanceRiskList.appendChild(createAttendanceRiskItem(course)));
+  }
+
+  // ========================
+  // Skill map and degree matrix
+  // ========================
+
+  function getSkillRadarPoints(values) {
+    const center = 120;
+    const radius = 85;
+    const angles = [-90, -30, 30, 90, 150, 210];
+    const skillNames = Object.keys(analyticsCampus.data.skillMap);
+
+    return skillNames.map((skillName, index) => {
+      const angle = angles[index] * (Math.PI / 180);
+      const valueRadius = radius * ((values[skillName] || 0) / 100);
+      return `${(center + Math.cos(angle) * valueRadius).toFixed(1)},${(center + Math.sin(angle) * valueRadius).toFixed(1)}`;
+    }).join(' ');
+  }
+
+  function renderSkillMap() {
+    const selectedCourse = analyticsCampus.getCourseById(selectedSkillCourse);
+    const skillValues = { ...analyticsCampus.data.skillMap, ...(selectedCourse?.skills || {}) };
+    skillArea.setAttribute('points', getSkillRadarPoints(skillValues));
+    skillList.innerHTML = '';
+
+    Object.entries(analyticsCampus.data.skillMap).forEach(([skillName, value]) => {
+      const row = document.createElement('div');
+      const courseContributes = Boolean(selectedCourse?.skills?.[skillName]);
+      row.className = 'skill-list__row';
+      row.classList.toggle('is-highlighted', courseContributes);
+      row.innerHTML = `<span class="skill-list__label"></span><strong class="skill-list__value">${skillValues[skillName]}%</strong><span class="skill-list__track"><span style="--skill-width: ${skillValues[skillName]}%"></span></span>`;
+      row.querySelector('.skill-list__label').textContent = skillName;
+      skillList.appendChild(row);
+    });
+  }
+
+  function renderDegreeMatrix() {
+    degreeMatrix.innerHTML = '';
+    analyticsCampus.data.degreeMatrix.forEach((item) => {
+      const matrixItem = document.createElement(item.courseId ? 'button' : 'div');
+      const stateSymbol = item.state === 'completed' ? '✓' : item.state === 'current' ? '◉' : '○';
+      matrixItem.className = `degree-item is-${item.state}`;
+      if (item.courseId) {
+        matrixItem.type = 'button';
+        matrixItem.dataset.courseId = item.courseId;
+        matrixItem.addEventListener('click', () => {
+          selectedSkillCourse = item.courseId;
+          skillCourseSelect.value = item.courseId;
+          renderSkillMap();
+        });
+      }
+      matrixItem.innerHTML = `<span class="degree-item__state">${stateSymbol}</span><span></span>`;
+      matrixItem.querySelector('span:last-child').textContent = item.title;
+      degreeMatrix.appendChild(matrixItem);
+    });
+  }
+
+  function initializeAdvancedAnalytics() {
+    expectedGrades = getScenarioGrades('expected');
+    const allSkillsOption = document.createElement('option');
+    allSkillsOption.value = '';
+    allSkillsOption.textContent = 'All skill areas';
+    skillCourseSelect.appendChild(allSkillsOption);
+    analyticsCampus.data.courses.forEach((course) => {
+      const option = document.createElement('option');
+      option.value = course.id;
+      option.textContent = course.title;
+      skillCourseSelect.appendChild(option);
+    });
+    skillCourseSelect.value = '';
+    renderForecastCourses();
+    updateForecastSummary();
+    renderAttendanceRisk();
+    renderSkillMap();
+    renderDegreeMatrix();
+  }
+
   gpaRowsBody.addEventListener('input', calculateGPA);
   gpaRowsBody.addEventListener('change', calculateGPA);
   gpaRowsBody.addEventListener('click', (event) => {
@@ -148,6 +392,16 @@ if (analyticsPage) {
   });
   addCourseButton.addEventListener('click', addCourseRow);
 
+  forecastScenarioButtons.forEach((button) => {
+    button.addEventListener('click', () => applyForecastScenario(button.dataset.forecastScenario));
+  });
+
+  skillCourseSelect.addEventListener('change', () => {
+    selectedSkillCourse = skillCourseSelect.value;
+    renderSkillMap();
+    document.dispatchEvent(new CustomEvent('campus:course-selected', { detail: { courseId: selectedSkillCourse } }));
+  });
+
   [totalClassesInput, classesAttendedInput, requiredPercentageInput].forEach((input) => {
     input.addEventListener('input', calculateAttendance);
     input.addEventListener('change', calculateAttendance);
@@ -155,5 +409,20 @@ if (analyticsPage) {
 
   calculateGPA();
   calculateAttendance();
+  initializeAdvancedAnalytics();
+
+  window.addEventListener('campus:open-forecast', () => document.querySelector('#forecast')?.scrollIntoView({ behavior: 'smooth' }));
+  window.addEventListener('campus:open-attendance-risk', () => document.querySelector('#attendance-risk')?.scrollIntoView({ behavior: 'smooth' }));
+  document.addEventListener('campus:course-selected', (event) => {
+    if (event.detail?.courseId && skillCourseSelect.value !== event.detail.courseId) {
+      selectedSkillCourse = event.detail.courseId;
+      skillCourseSelect.value = selectedSkillCourse;
+      renderSkillMap();
+    }
+  });
+
+  if (window.location.hash === '#forecast') {
+    document.querySelector('#forecast')?.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
