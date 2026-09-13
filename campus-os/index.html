@@ -8,10 +8,19 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/utils.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/theme.js" defer></script>
+    <script src="js/personalization.js" defer></script>
     <script src="js/navigation.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/command-palette.js" defer></script>
+    <script src="js/focus.js" defer></script>
+    <script src="js/notifications.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
   </head>
   <body data-page="overview">
     <div class="app-shell">
@@ -49,15 +58,15 @@
         </nav>
 
         <div class="sidebar-bottom">
-          <button class="sidebar-action" type="button">
+          <button class="sidebar-action" data-settings-open type="button">
             <span class="settings-mark" aria-hidden="true"></span>
             <span>Settings</span>
           </button>
 
           <div class="profile-preview">
-            <span class="profile-avatar" aria-hidden="true">AS</span>
+            <span class="profile-avatar" aria-hidden="true">JS</span>
             <span class="profile-copy">
-              <strong>Alex Student</strong>
+              <strong>John Student</strong>
               <span>Undergraduate</span>
             </span>
             <span class="online-indicator" aria-label="Online"></span>
@@ -78,13 +87,13 @@
           </div>
 
           <div class="topbar-actions">
-            <label class="search-field">
+            <label class="search-field" data-universal-search-trigger>
               <span class="visually-hidden">Search CampusOS</span>
               <span class="search-mark" aria-hidden="true"></span>
-              <input type="search" placeholder="Search workspace" autocomplete="off">
+              <input data-universal-search type="search" placeholder="Search workspace" aria-label="Search CampusOS" autocomplete="off">
             </label>
 
-            <button class="notification-button" type="button" aria-label="View notifications">
+            <button class="notification-button" data-notification-toggle type="button" aria-label="View notifications">
               <span>Notifications</span>
               <span class="notification-dot" aria-hidden="true"></span>
             </button>
@@ -94,11 +103,11 @@
               <span data-theme-label>Dark mode</span>
             </button>
 
-            <button class="top-avatar" type="button" aria-label="Open user profile">AS</button>
+            <button class="top-avatar" type="button" aria-label="Open user profile">JS</button>
           </div>
         </header>
 
-        <main class="page-content dashboard-content">
+        <main class="page-content dashboard-content" data-dashboard-page>
           <section class="welcome-header" aria-labelledby="welcome-heading">
             <div>
               <p class="page-kicker">CampusOS / Overview</p>
@@ -179,6 +188,32 @@
             </div>
           </section>
 
+          <section class="dashboard-panel control-center-panel" id="control-center" data-control-center aria-labelledby="control-center-heading">
+            <div class="panel-heading">
+              <div>
+                <p class="panel-kicker">System status / Academic control</p>
+                <h2 id="control-center-heading">Academic Control Center</h2>
+              </div>
+              <span class="panel-tag">Calculated locally</span>
+            </div>
+            <div class="control-center-grid">
+              <div class="health-score">
+                <div class="health-score__ring" data-health-ring style="--health-progress: 86%"><span data-academic-health>86</span></div>
+                <div class="health-score__copy"><span class="health-score__label">Academic Health</span><strong class="control-center-item__value"><span data-academic-health-label>86</span> / 100</strong><span class="control-center-item__detail">GPA, attendance, work, deadlines</span></div>
+                <span class="info-button" role="img" title="GPA 35%, attendance 30%, work completion 20%, deadline readiness 15%" aria-label="Academic Health Score uses GPA, attendance, work completion, and deadline readiness">i</span>
+              </div>
+              <div class="control-center-item"><span class="control-center-item__label">Academic status</span><strong class="control-center-item__value" data-academic-status>ON TRACK</strong><span class="control-center-item__detail">Current semester</span></div>
+              <div class="control-center-item"><span class="control-center-item__label">GPA</span><strong class="control-center-item__value" data-health-gpa>3.74</strong><span class="control-center-item__detail">4.0 scale</span></div>
+              <div class="control-center-item"><span class="control-center-item__label">Attendance</span><strong class="control-center-item__value" data-health-attendance>87%</strong><span class="control-center-item__detail">Overall presence</span></div>
+              <div class="control-center-item"><span class="control-center-item__label">Risk level</span><strong class="control-center-item__value risk-low" data-academic-risk>LOW</strong><span class="control-center-item__detail">Based on current signals</span></div>
+            </div>
+            <div class="control-center-secondary">
+              <span><small>Academic load</small><strong data-academic-load>MODERATE</strong></span>
+              <span><small>Semester completion</small><strong data-semester-completion>68%</strong></span>
+              <span><small>Next critical event</small><strong data-critical-event>Web Technologies Assignment</strong><em data-critical-countdown>Calculating...</em></span>
+            </div>
+          </section>
+
           <div class="dashboard-layout">
             <section class="dashboard-panel schedule-panel" aria-labelledby="schedule-heading">
               <div class="panel-heading">
@@ -186,10 +221,10 @@
                   <p class="panel-kicker">Today</p>
                   <h2 id="schedule-heading">Today's Schedule</h2>
                 </div>
-                <span class="panel-tag">3 classes</span>
+                <span class="timeline-now-readout"><span>NOW</span><strong data-live-now>--:--</strong></span>
               </div>
 
-              <ol class="timeline">
+              <ol class="timeline" data-live-timeline>
                 <li class="timeline-item">
                   <time class="timeline-time" datetime="09:00">09:00 <span>AM</span></time>
                   <span class="timeline-rail" aria-hidden="true"><span class="timeline-node"></span></span>
@@ -215,6 +250,7 @@
                   </div>
                 </li>
               </ol>
+              <p class="timeline-next-class" data-next-class-summary>Next class: calculating...</p>
             </section>
 
             <section class="dashboard-panel deadlines-panel" aria-labelledby="deadlines-heading">
@@ -312,6 +348,47 @@
               </div>
               <div class="semester-ring" style="--progress: 68%" role="progressbar" aria-label="Semester 5 progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68">
                 <div class="semester-ring-center"><strong>68%</strong><span>completed</span></div>
+              </div>
+            </section>
+          </div>
+
+          <div class="advanced-dashboard-grid">
+            <section class="dashboard-panel workload-panel" aria-labelledby="workload-heading">
+              <div class="panel-heading">
+                <div><p class="panel-kicker">Forecast</p><h2 id="workload-heading">Weekly Workload</h2></div>
+                <span class="panel-tag">Classes + assessments</span>
+              </div>
+              <div class="workload-list" data-workload-list></div>
+              <div class="workload-insights"><span>Heaviest <strong data-heaviest-day>--</strong></span><span>Lightest <strong data-lightest-day>--</strong></span></div>
+            </section>
+
+            <section class="dashboard-panel heatmap-panel" aria-labelledby="heatmap-heading">
+              <div class="panel-heading">
+                <div><p class="panel-kicker">Study rhythm</p><h2 id="heatmap-heading">Focus Activity</h2></div>
+                <span class="panel-tag">28 days</span>
+              </div>
+              <div class="study-heatmap-wrap"><div class="study-heatmap" data-study-heatmap></div></div>
+              <p class="heatmap-tooltip" data-heatmap-tooltip>Select a day to inspect focused minutes.</p>
+            </section>
+
+            <section class="dashboard-panel critical-events-panel" id="events" aria-labelledby="critical-events-heading">
+              <div class="panel-heading">
+                <div><p class="panel-kicker">Urgency monitor</p><h2 id="critical-events-heading">Critical Events</h2></div>
+                <span class="panel-tag">Sorted by time</span>
+              </div>
+              <div class="critical-events-list" data-critical-events></div>
+            </section>
+
+            <section class="dashboard-panel quick-actions-panel" aria-labelledby="quick-actions-heading">
+              <div class="panel-heading">
+                <div><p class="panel-kicker">Shortcuts</p><h2 id="quick-actions-heading">Quick Actions</h2></div>
+                <span class="panel-tag">Keyboard ready</span>
+              </div>
+              <div class="quick-actions">
+                <button class="quick-action" data-focus-open type="button"><span>▶</span><span>Start Focus</span><span aria-hidden="true">→</span></button>
+                <a class="quick-action" href="analytics.html#forecast"><span>◇</span><span>GPA Forecast</span><span aria-hidden="true">→</span></a>
+                <a class="quick-action" href="analytics.html#attendance-risk"><span>◷</span><span>Attendance Simulator</span><span aria-hidden="true">→</span></a>
+                <button class="quick-action" data-command-open type="button"><span>⌘</span><span>Command Palette</span><span aria-hidden="true">→</span></button>
               </div>
             </section>
           </div>

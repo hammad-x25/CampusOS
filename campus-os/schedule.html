@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/data.js" defer></script>
+    <script src="js/utils.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/theme.js" defer></script>
+    <script src="js/personalization.js" defer></script>
     <script src="js/navigation.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/command-palette.js" defer></script>
+    <script src="js/focus.js" defer></script>
+    <script src="js/notifications.js" defer></script>
     <script src="js/schedule.js" defer></script>
   </head>
   <body data-page="schedule">
@@ -50,15 +58,15 @@
         </nav>
 
         <div class="sidebar-bottom">
-          <button class="sidebar-action" type="button">
+          <button class="sidebar-action" data-settings-open type="button">
             <span class="settings-mark" aria-hidden="true"></span>
             <span>Settings</span>
           </button>
 
           <div class="profile-preview">
-            <span class="profile-avatar" aria-hidden="true">AS</span>
+            <span class="profile-avatar" aria-hidden="true">JS</span>
             <span class="profile-copy">
-              <strong>Alex Student</strong>
+              <strong>John Student</strong>
               <span>Undergraduate</span>
             </span>
             <span class="online-indicator" aria-label="Online"></span>
@@ -79,13 +87,13 @@
           </div>
 
           <div class="topbar-actions">
-            <label class="search-field">
+            <label class="search-field" data-universal-search-trigger>
               <span class="visually-hidden">Search CampusOS</span>
               <span class="search-mark" aria-hidden="true"></span>
-              <input type="search" placeholder="Search workspace" autocomplete="off">
+              <input data-universal-search type="search" placeholder="Search workspace" aria-label="Search CampusOS" autocomplete="off">
             </label>
 
-            <button class="notification-button" type="button" aria-label="View notifications">
+            <button class="notification-button" data-notification-toggle type="button" aria-label="View notifications">
               <span>Notifications</span>
               <span class="notification-dot" aria-hidden="true"></span>
             </button>
@@ -95,7 +103,7 @@
               <span data-theme-label>Dark mode</span>
             </button>
 
-            <button class="top-avatar" type="button" aria-label="Open user profile">AS</button>
+            <button class="top-avatar" type="button" aria-label="Open user profile">JS</button>
           </div>
         </header>
 
@@ -170,30 +178,30 @@
 
               <div class="day-column" data-day-column="tuesday">
                 <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
-                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 222px; --class-height: 110px" data-class-title="Artificial Intelligence" data-class-code="CS-421" data-class-time="11:00 AM — 12:30 PM" data-class-room="AI Lab" data-class-instructor="Dr. Amina Khan" data-class-topic="Heuristic search strategies" data-class-attendance="9 / 10 classes">
+                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 222px; --class-height: 110px" data-class-title="Artificial Intelligence" data-class-code="CS-421" data-class-time="11:00 AM — 12:30 PM" data-class-room="AI Lab" data-class-instructor="Dr. Amina Khan" data-class-topic="Heuristic search strategies" data-class-attendance="13 / 17 classes">
                   <span class="class-block-time">11:00 AM</span><strong>Artificial Intelligence</strong><span>AI Lab</span><small>AK</small>
                 </button>
-                <button class="class-block class-accent-warning" data-class-open type="button" style="--class-top: 444px; --class-height: 110px" data-class-title="Human Computer Interaction" data-class-code="CS-318" data-class-time="02:00 PM — 03:30 PM" data-class-room="Design Studio 2" data-class-instructor="Ms. Sara Malik" data-class-topic="Usability testing methods" data-class-attendance="8 / 10 classes">
+                <button class="class-block class-accent-warning" data-class-open type="button" style="--class-top: 444px; --class-height: 110px" data-class-title="Human Computer Interaction" data-class-code="CS-318" data-class-time="02:00 PM — 03:30 PM" data-class-room="Design Studio 2" data-class-instructor="Ms. Sara Malik" data-class-topic="Usability testing methods" data-class-attendance="13 / 16 classes">
                   <span class="class-block-time">02:00 PM</span><strong>Human Computer Interaction</strong><span>Design Studio 2</span><small>SM</small>
                 </button>
               </div>
 
               <div class="day-column" data-day-column="wednesday">
                 <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
-                <button class="class-block class-accent-success" data-class-open type="button" style="--class-top: 148px; --class-height: 110px" data-class-title="Database Systems" data-class-code="CS-305" data-class-time="10:00 AM — 11:30 AM" data-class-room="Room CS-205" data-class-instructor="Prof. Farhan Ali" data-class-topic="Query optimization" data-class-attendance="10 / 10 classes">
+                <button class="class-block class-accent-success" data-class-open type="button" style="--class-top: 148px; --class-height: 110px" data-class-title="Database Systems" data-class-code="CS-305" data-class-time="10:00 AM — 11:30 AM" data-class-room="Room CS-205" data-class-instructor="Prof. Farhan Ali" data-class-topic="Query optimization" data-class-attendance="14 / 15 classes">
                   <span class="class-block-time">10:00 AM</span><strong>Database Systems</strong><span>Room CS-205</span><small>FA</small>
                 </button>
-                <button class="class-block class-accent-cyan" data-class-open type="button" style="--class-top: 444px; --class-height: 146px" data-class-title="Operating Systems" data-class-code="CS-401" data-class-time="02:00 PM — 04:00 PM" data-class-room="Room CS-402" data-class-instructor="Dr. Bilal Ahmed" data-class-topic="Process scheduling" data-class-attendance="8 / 10 classes">
+                <button class="class-block class-accent-cyan" data-class-open type="button" style="--class-top: 444px; --class-height: 146px" data-class-title="Operating Systems" data-class-code="CS-401" data-class-time="02:00 PM — 04:00 PM" data-class-room="Room CS-402" data-class-instructor="Dr. Bilal Ahmed" data-class-topic="Process scheduling" data-class-attendance="10 / 15 classes">
                   <span class="class-block-time">02:00 PM</span><strong>Operating Systems</strong><span>Room CS-402</span><small>BA</small>
                 </button>
               </div>
 
               <div class="day-column" data-day-column="thursday">
                 <span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span><span class="hour-line"></span>
-                <button class="class-block class-accent-cyan" data-class-open type="button" style="--class-top: 0px; --class-height: 74px" data-class-title="Web Technologies" data-class-code="CS-312" data-class-time="08:00 AM — 09:00 AM" data-class-room="Web Lab 1" data-class-instructor="Dr. Noman Shafi" data-class-topic="Responsive layout lab" data-class-attendance="9 / 10 classes">
-                  <span class="class-block-time">08:00 AM</span><strong>Web Technologies</strong><span>Web Lab 1</span><small>NS</small>
+                <button class="class-block class-accent-warning" data-class-open type="button" style="--class-top: 0px; --class-height: 74px" data-class-title="Human Computer Interaction" data-class-code="CS-318" data-class-time="08:00 AM — 09:00 AM" data-class-room="Design Studio 2" data-class-instructor="Ms. Sara Malik" data-class-topic="Interaction design critique" data-class-attendance="13 / 16 classes">
+                  <span class="class-block-time">08:00 AM</span><strong>Human Computer Interaction</strong><span>Design Studio 2</span><small>SM</small>
                 </button>
-                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 370px; --class-height: 74px" data-class-title="Artificial Intelligence" data-class-code="CS-421" data-class-time="01:00 PM — 02:00 PM" data-class-room="Room AI-204" data-class-instructor="Dr. Amina Khan" data-class-topic="Knowledge representation" data-class-attendance="9 / 10 classes">
+                <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 370px; --class-height: 74px" data-class-title="Artificial Intelligence" data-class-code="CS-421" data-class-time="01:00 PM — 02:00 PM" data-class-room="Room AI-204" data-class-instructor="Dr. Amina Khan" data-class-topic="Knowledge representation" data-class-attendance="13 / 17 classes">
                   <span class="class-block-time">01:00 PM</span><strong>Artificial Intelligence</strong><span>Room AI-204</span><small>AK</small>
                 </button>
               </div>
@@ -203,7 +211,7 @@
                 <button class="class-block class-accent-violet" data-class-open type="button" style="--class-top: 148px; --class-height: 110px" data-class-title="Software Engineering" data-class-code="CS-410" data-class-time="10:00 AM — 11:30 AM" data-class-room="Room SE-110" data-class-instructor="Dr. Hamza Raza" data-class-topic="Software requirements" data-class-attendance="8 / 10 classes">
                   <span class="class-block-time">10:00 AM</span><strong>Software Engineering</strong><span>Room SE-110</span><small>HR</small>
                 </button>
-                <button class="class-block class-accent-success" data-class-open type="button" style="--class-top: 518px; --class-height: 74px" data-class-title="Database Systems" data-class-code="CS-305" data-class-time="03:00 PM — 04:00 PM" data-class-room="Room CS-205" data-class-instructor="Prof. Farhan Ali" data-class-topic="Transactions and recovery" data-class-attendance="10 / 10 classes">
+                <button class="class-block class-accent-success" data-class-open type="button" style="--class-top: 518px; --class-height: 74px" data-class-title="Database Systems" data-class-code="CS-305" data-class-time="03:00 PM — 04:00 PM" data-class-room="Room CS-205" data-class-instructor="Prof. Farhan Ali" data-class-topic="Transactions and recovery" data-class-attendance="14 / 15 classes">
                   <span class="class-block-time">03:00 PM</span><strong>Database Systems</strong><span>Room CS-205</span><small>FA</small>
                 </button>
               </div>
