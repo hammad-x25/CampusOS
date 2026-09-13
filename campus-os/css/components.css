@@ -1,0 +1,70 @@
+/* Components: reusable modal and interaction primitives. */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 7, 17, 0.76);
+  backdrop-filter: blur(5px);
+}
+
+.modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 540px);
+  padding: 28px;
+  border: 1px solid rgba(67, 217, 255, 0.38);
+  border-radius: var(--border-radius);
+  background: var(--surface);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45), 0 0 26px rgba(67, 217, 255, 0.12);
+  animation: modal-enter 180ms ease-out;
+}
+
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 16px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: background-color var(--transition-timing), border-color var(--transition-timing), color var(--transition-timing);
+}
+
+.modal-close:hover {
+  border-color: var(--cyan-accent);
+  background: rgba(67, 217, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.modal-dialog h2 {
+  margin-top: 5px;
+  padding-right: 35px;
+  color: var(--text-primary);
+  font-size: 1.45rem;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
