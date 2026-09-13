@@ -84,9 +84,223 @@
           </div>
         </header>
 
-        <main class="page-content">
-          <p class="page-kicker">CampusOS / Workspace</p>
-          <h1>Overview</h1>
+        <main class="page-content dashboard-content">
+          <section class="welcome-header" aria-labelledby="welcome-heading">
+            <div>
+              <p class="page-kicker">CampusOS / Overview</p>
+              <h1 id="welcome-heading" class="welcome-title"><span data-greeting>Good Evening</span>, John</h1>
+              <p class="welcome-subtitle">Here's your academic command center.</p>
+            </div>
+
+            <div class="system-status" role="status">
+              <span class="status-pulse" aria-hidden="true"></span>
+              <span>SYSTEM ONLINE</span>
+            </div>
+          </section>
+
+          <section aria-labelledby="statistics-heading">
+            <h2 id="statistics-heading" class="visually-hidden">Academic statistics</h2>
+            <div class="stats-grid">
+              <article class="stat-card stat-card-cyan">
+                <div class="stat-card-top">
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <path d="m3 8 9-5 9 5-9 5-9-5Z"></path>
+                      <path d="M6 10.2V15c0 1.8 2.7 3.5 6 3.5s6-1.7 6-3.5v-4.8"></path>
+                      <path d="M21 8v6"></path>
+                    </svg>
+                  </span>
+                  <span class="stat-category">Academic signal</span>
+                </div>
+                <p class="stat-name">GPA</p>
+                <p class="stat-value">3.74</p>
+                <p class="stat-meta"><span class="stat-positive">+0.12</span> this semester</p>
+              </article>
+
+              <article class="stat-card stat-card-violet">
+                <div class="stat-card-top">
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5"></path>
+                      <path d="M12 7v5l3.5 2"></path>
+                      <path d="M16.5 3.5h4v4"></path>
+                    </svg>
+                  </span>
+                  <span class="stat-category">Presence index</span>
+                </div>
+                <p class="stat-name">Attendance</p>
+                <p class="stat-value">87%</p>
+                <p class="stat-meta"><span class="stat-positive">Safe Zone</span></p>
+              </article>
+
+              <article class="stat-card stat-card-warning">
+                <div class="stat-card-top">
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <rect x="5" y="4" width="14" height="17" rx="2"></rect>
+                      <path d="M9 4.5h6M8.5 10h7M8.5 14h4M8.5 18h7"></path>
+                    </svg>
+                  </span>
+                  <span class="stat-category">Action queue</span>
+                </div>
+                <p class="stat-name">Pending Tasks</p>
+                <p class="stat-value">6</p>
+                <p class="stat-meta"><span class="stat-warning">2 high priority</span></p>
+              </article>
+
+              <article class="stat-card stat-card-success">
+                <div class="stat-card-top">
+                  <span class="stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <circle cx="12" cy="12" r="8.5"></circle>
+                      <path d="M12 7v5l3 2"></path>
+                    </svg>
+                  </span>
+                  <span class="stat-category">Focus rhythm</span>
+                </div>
+                <p class="stat-name">Study Time</p>
+                <p class="stat-value">18.5h</p>
+                <p class="stat-meta"><span class="stat-positive">This week</span></p>
+              </article>
+            </div>
+          </section>
+
+          <div class="dashboard-layout">
+            <section class="dashboard-panel schedule-panel" aria-labelledby="schedule-heading">
+              <div class="panel-heading">
+                <div>
+                  <p class="panel-kicker">Today</p>
+                  <h2 id="schedule-heading">Today's Schedule</h2>
+                </div>
+                <span class="panel-tag">3 classes</span>
+              </div>
+
+              <ol class="timeline">
+                <li class="timeline-item">
+                  <time class="timeline-time" datetime="09:00">09:00 <span>AM</span></time>
+                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-node"></span></span>
+                  <div class="timeline-event">
+                    <h3>Web Technologies</h3>
+                    <p>Room CS-301</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <time class="timeline-time" datetime="11:30">11:30 <span>AM</span></time>
+                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-node"></span></span>
+                  <div class="timeline-event">
+                    <h3>Artificial Intelligence</h3>
+                    <p>AI Lab</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <time class="timeline-time" datetime="14:00">02:00 <span>PM</span></time>
+                  <span class="timeline-rail" aria-hidden="true"><span class="timeline-node"></span></span>
+                  <div class="timeline-event">
+                    <h3>Database Systems</h3>
+                    <p>Room CS-205</p>
+                  </div>
+                </li>
+              </ol>
+            </section>
+
+            <section class="dashboard-panel deadlines-panel" aria-labelledby="deadlines-heading">
+              <div class="panel-heading">
+                <div>
+                  <p class="panel-kicker">Next up</p>
+                  <h2 id="deadlines-heading">Upcoming Deadlines</h2>
+                </div>
+                <span class="panel-tag">3 items</span>
+              </div>
+
+              <div class="deadline-list">
+                <article class="deadline-card">
+                  <div class="deadline-card-heading">
+                    <div>
+                      <p class="deadline-course">Web Technologies</p>
+                      <h3>Web Technologies Assignment</h3>
+                    </div>
+                    <span class="priority-badge priority-high">High</span>
+                  </div>
+                  <div class="deadline-info">
+                    <span><small>Deadline</small>Tomorrow, 11:59 PM</span>
+                    <span><small>Status</small>In progress</span>
+                  </div>
+                  <div class="deadline-progress">
+                    <div class="progress-label"><span>Progress</span><strong>68%</strong></div>
+                    <div class="progress-track" role="progressbar" aria-label="Web Technologies Assignment progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68"><span style="width: 68%"></span></div>
+                  </div>
+                </article>
+
+                <article class="deadline-card">
+                  <div class="deadline-card-heading">
+                    <div>
+                      <p class="deadline-course">Artificial Intelligence</p>
+                      <h3>AI Quiz</h3>
+                    </div>
+                    <span class="priority-badge priority-medium">Medium</span>
+                  </div>
+                  <div class="deadline-info">
+                    <span><small>Deadline</small>Friday, 10:00 AM</span>
+                    <span><small>Status</small>Review pending</span>
+                  </div>
+                  <div class="deadline-progress">
+                    <div class="progress-label"><span>Progress</span><strong>42%</strong></div>
+                    <div class="progress-track" role="progressbar" aria-label="AI Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="42"><span style="width: 42%"></span></div>
+                  </div>
+                </article>
+
+                <article class="deadline-card">
+                  <div class="deadline-card-heading">
+                    <div>
+                      <p class="deadline-course">Database Systems</p>
+                      <h3>Database Project</h3>
+                    </div>
+                    <span class="priority-badge priority-high">High</span>
+                  </div>
+                  <div class="deadline-info">
+                    <span><small>Deadline</small>22 Sep 2026</span>
+                    <span><small>Status</small>Started</span>
+                  </div>
+                  <div class="deadline-progress">
+                    <div class="progress-label"><span>Progress</span><strong>28%</strong></div>
+                    <div class="progress-track" role="progressbar" aria-label="Database Project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="28"><span style="width: 28%"></span></div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="dashboard-panel weekly-panel" aria-labelledby="weekly-heading">
+              <div class="panel-heading">
+                <div>
+                  <p class="panel-kicker">Study rhythm</p>
+                  <h2 id="weekly-heading">Weekly Progress</h2>
+                </div>
+                <span class="panel-tag">This week</span>
+              </div>
+
+              <ol class="weekly-bars" aria-label="Weekly study progress">
+                <li class="week-day"><span class="day-label">MON</span><span class="bar-track"><span class="bar-fill" style="height: 72%"></span></span><span class="day-value">72%</span></li>
+                <li class="week-day"><span class="day-label">TUE</span><span class="bar-track"><span class="bar-fill" style="height: 88%"></span></span><span class="day-value">88%</span></li>
+                <li class="week-day"><span class="day-label">WED</span><span class="bar-track"><span class="bar-fill" style="height: 53%"></span></span><span class="day-value">53%</span></li>
+                <li class="week-day"><span class="day-label">THU</span><span class="bar-track"><span class="bar-fill" style="height: 81%"></span></span><span class="day-value">81%</span></li>
+                <li class="week-day"><span class="day-label">FRI</span><span class="bar-track"><span class="bar-fill" style="height: 64%"></span></span><span class="day-value">64%</span></li>
+                <li class="week-day"><span class="day-label">SAT</span><span class="bar-track"><span class="bar-fill" style="height: 38%"></span></span><span class="day-value">38%</span></li>
+                <li class="week-day"><span class="day-label">SUN</span><span class="bar-track"><span class="bar-fill" style="height: 24%"></span></span><span class="day-value">24%</span></li>
+              </ol>
+            </section>
+
+            <section class="dashboard-panel semester-panel" aria-labelledby="semester-heading">
+              <div>
+                <p class="panel-kicker">Academic cycle</p>
+                <h2 id="semester-heading">Semester 5</h2>
+                <p class="semester-copy">68% completed</p>
+                <p class="semester-detail">14 of 20 teaching weeks tracked</p>
+              </div>
+              <div class="semester-ring" style="--progress: 68%" role="progressbar" aria-label="Semester 5 progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68">
+                <div class="semester-ring-center"><strong>68%</strong><span>completed</span></div>
+              </div>
+            </section>
+          </div>
         </main>
 
         <footer class="app-footer">
