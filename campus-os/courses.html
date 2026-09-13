@@ -84,9 +84,204 @@
           </div>
         </header>
 
-        <main class="page-content">
-          <p class="page-kicker">CampusOS / Workspace</p>
-          <h1>Courses</h1>
+        <main class="page-content courses-content course-command-center" data-course-page>
+          <section class="courses-hero" aria-labelledby="courses-heading">
+            <div>
+              <p class="page-kicker">CampusOS / Courses</p>
+              <h1 id="courses-heading">My Courses</h1>
+              <p class="courses-subtitle">Track progress across your semester.</p>
+            </div>
+
+            <div class="course-metrics" aria-label="Course summary">
+              <div class="course-metric">
+                <strong>5</strong>
+                <span>Active Courses</span>
+              </div>
+              <div class="course-metric">
+                <strong>18</strong>
+                <span>Credit Hours</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="course-tools" aria-label="Search and filter courses">
+            <label class="course-search">
+              <span class="search-mark" aria-hidden="true"></span>
+              <span class="visually-hidden">Search courses</span>
+              <input data-course-search type="search" placeholder="Search by course, code, or instructor" autocomplete="off">
+            </label>
+
+            <div class="course-filters" role="group" aria-label="Filter by category">
+              <button class="filter-button is-active" data-category-filter="all" type="button" aria-pressed="true">All</button>
+              <button class="filter-button" data-category-filter="computing" type="button" aria-pressed="false">Computing</button>
+              <button class="filter-button" data-category-filter="core" type="button" aria-pressed="false">Core</button>
+              <button class="filter-button" data-category-filter="elective" type="button" aria-pressed="false">Elective</button>
+            </div>
+
+            <p class="course-result-summary" data-course-result>Showing 6 courses</p>
+          </section>
+
+          <section aria-labelledby="course-list-heading">
+            <div class="course-section-heading">
+              <div>
+                <p class="panel-kicker">Academic modules</p>
+                <h2 id="course-list-heading">Course Command Center</h2>
+              </div>
+              <span class="panel-tag">Semester 5</span>
+            </div>
+
+            <div class="course-grid" data-course-grid>
+              <article class="course-card course-accent-cyan" data-course-card data-category="computing" data-search="cs-312 web technologies dr. noman shafi computing">
+                <div class="course-card-header">
+                  <span class="course-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <path d="M4 5.5h16v12H4z"></path>
+                      <path d="m7 9 2.5 2L7 13M12 13h4"></path>
+                    </svg>
+                  </span>
+                  <span class="course-category">Computing</span>
+                </div>
+                <p class="course-code">CS-312</p>
+                <h3 class="course-title">Web Technologies</h3>
+                <p class="course-instructor">Dr. Noman Shafi</p>
+                <div class="course-meta"><span>3 Credit Hours</span><strong>72% COMPLETE</strong></div>
+                <div class="course-progress-bar" role="progressbar" aria-label="Web Technologies progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="72"><span style="width: 72%"></span></div>
+                <div class="course-next"><span>Next class</span><strong>Monday · 09:00 AM</strong></div>
+                <button class="view-course-button" data-course-open type="button" data-course-id="web-technologies" data-course-title="Web Technologies" data-course-code="CS-312" data-course-instructor="Dr. Noman Shafi" data-course-credits="3 Credit Hours" data-course-room="Room CS-301" data-course-progress="72%" data-course-next="Monday · 09:00 AM" data-course-assessment="Responsive portfolio checkpoint">
+                  <span>View Course</span><span aria-hidden="true">→</span>
+                </button>
+              </article>
+
+              <article class="course-card course-accent-violet" data-course-card data-category="computing" data-search="cs-421 artificial intelligence dr. amina khan computing">
+                <div class="course-card-header">
+                  <span class="course-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <circle cx="12" cy="12" r="6.5"></circle>
+                      <path d="M12 5.5V3M12 21v-2.5M5.5 12H3M21 12h-2.5M7.4 7.4 5.6 5.6M18.4 18.4l-1.8-1.8M16.6 7.4l1.8-1.8M7.4 16.6l-1.8 1.8"></path>
+                    </svg>
+                  </span>
+                  <span class="course-category">Computing</span>
+                </div>
+                <p class="course-code">CS-421</p>
+                <h3 class="course-title">Artificial Intelligence</h3>
+                <p class="course-instructor">Dr. Amina Khan</p>
+                <div class="course-meta"><span>3 Credit Hours</span><strong>64% COMPLETE</strong></div>
+                <div class="course-progress-bar" role="progressbar" aria-label="Artificial Intelligence progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64"><span style="width: 64%"></span></div>
+                <div class="course-next"><span>Next class</span><strong>Tuesday · 11:30 AM</strong></div>
+                <button class="view-course-button" data-course-open type="button" data-course-id="artificial-intelligence" data-course-title="Artificial Intelligence" data-course-code="CS-421" data-course-instructor="Dr. Amina Khan" data-course-credits="3 Credit Hours" data-course-room="AI Lab" data-course-progress="64%" data-course-next="Tuesday · 11:30 AM" data-course-assessment="Search algorithm quiz">
+                  <span>View Course</span><span aria-hidden="true">→</span>
+                </button>
+              </article>
+
+              <article class="course-card course-accent-success" data-course-card data-category="core" data-search="cs-305 database systems prof. farhan ali core">
+                <div class="course-card-header">
+                  <span class="course-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <ellipse cx="12" cy="5.5" rx="7" ry="2.5"></ellipse>
+                      <path d="M5 5.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6M5 11.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"></path>
+                    </svg>
+                  </span>
+                  <span class="course-category">Core</span>
+                </div>
+                <p class="course-code">CS-305</p>
+                <h3 class="course-title">Database Systems</h3>
+                <p class="course-instructor">Prof. Farhan Ali</p>
+                <div class="course-meta"><span>3 Credit Hours</span><strong>81% COMPLETE</strong></div>
+                <div class="course-progress-bar" role="progressbar" aria-label="Database Systems progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="81"><span style="width: 81%"></span></div>
+                <div class="course-next"><span>Next class</span><strong>Wednesday · 02:00 PM</strong></div>
+                <button class="view-course-button" data-course-open type="button" data-course-id="database-systems" data-course-title="Database Systems" data-course-code="CS-305" data-course-instructor="Prof. Farhan Ali" data-course-credits="3 Credit Hours" data-course-room="Room CS-205" data-course-progress="81%" data-course-next="Wednesday · 02:00 PM" data-course-assessment="Normalization case study">
+                  <span>View Course</span><span aria-hidden="true">→</span>
+                </button>
+              </article>
+
+              <article class="course-card course-accent-warning" data-course-card data-category="elective" data-search="CS-318 human computer interaction ms. sara malik elective">
+                <div class="course-card-header">
+                  <span class="course-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <path d="m6 4 11 8-5 1.5L10.5 19 6 4Z"></path>
+                      <path d="m13 14 3 3"></path>
+                    </svg>
+                  </span>
+                  <span class="course-category">Elective</span>
+                </div>
+                <p class="course-code">CS-318</p>
+                <h3 class="course-title">Human Computer Interaction</h3>
+                <p class="course-instructor">Ms. Sara Malik</p>
+                <div class="course-meta"><span>3 Credit Hours</span><strong>58% COMPLETE</strong></div>
+                <div class="course-progress-bar" role="progressbar" aria-label="Human Computer Interaction progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="58"><span style="width: 58%"></span></div>
+                <div class="course-next"><span>Next class</span><strong>Thursday · 10:00 AM</strong></div>
+                <button class="view-course-button" data-course-open type="button" data-course-id="human-computer-interaction" data-course-title="Human Computer Interaction" data-course-code="CS-318" data-course-instructor="Ms. Sara Malik" data-course-credits="3 Credit Hours" data-course-room="Design Studio 2" data-course-progress="58%" data-course-next="Thursday · 10:00 AM" data-course-assessment="Usability testing report">
+                  <span>View Course</span><span aria-hidden="true">→</span>
+                </button>
+              </article>
+
+              <article class="course-card course-accent-cyan" data-course-card data-category="core" data-search="CS-401 operating systems dr. bilal ahmed core">
+                <div class="course-card-header">
+                  <span class="course-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <rect x="4" y="5" width="16" height="14" rx="2"></rect>
+                      <path d="M7.5 9h9M7.5 12h5M7.5 15h7"></path>
+                    </svg>
+                  </span>
+                  <span class="course-category">Core</span>
+                </div>
+                <p class="course-code">CS-401</p>
+                <h3 class="course-title">Operating Systems</h3>
+                <p class="course-instructor">Dr. Bilal Ahmed</p>
+                <div class="course-meta"><span>3 Credit Hours</span><strong>69% COMPLETE</strong></div>
+                <div class="course-progress-bar" role="progressbar" aria-label="Operating Systems progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="69"><span style="width: 69%"></span></div>
+                <div class="course-next"><span>Next class</span><strong>Friday · 09:00 AM</strong></div>
+                <button class="view-course-button" data-course-open type="button" data-course-id="operating-systems" data-course-title="Operating Systems" data-course-code="CS-401" data-course-instructor="Dr. Bilal Ahmed" data-course-credits="3 Credit Hours" data-course-room="Room CS-402" data-course-progress="69%" data-course-next="Friday · 09:00 AM" data-course-assessment="Process scheduling lab">
+                  <span>View Course</span><span aria-hidden="true">→</span>
+                </button>
+              </article>
+
+              <article class="course-card course-accent-violet" data-course-card data-category="computing" data-search="CS-410 software engineering dr. hamza raza computing">
+                <div class="course-card-header">
+                  <span class="course-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img">
+                      <path d="M12 4.5 14 6l2.5-.2.7 2.4 2 1.5-1.1 2.2.4 2.5-2.4.8-1.5 2-2.2-1.1-2.5.4-.8-2.4-2-1.5 1.1-2.2-.4-2.5 2.4-.8 1.5-2Z"></path>
+                      <circle cx="12" cy="12" r="2.5"></circle>
+                    </svg>
+                  </span>
+                  <span class="course-category">Computing</span>
+                </div>
+                <p class="course-code">CS-410</p>
+                <h3 class="course-title">Software Engineering</h3>
+                <p class="course-instructor">Dr. Hamza Raza</p>
+                <div class="course-meta"><span>3 Credit Hours</span><strong>76% COMPLETE</strong></div>
+                <div class="course-progress-bar" role="progressbar" aria-label="Software Engineering progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="76"><span style="width: 76%"></span></div>
+                <div class="course-next"><span>Next class</span><strong>Monday · 01:00 PM</strong></div>
+                <button class="view-course-button" data-course-open type="button" data-course-id="software-engineering" data-course-title="Software Engineering" data-course-code="CS-410" data-course-instructor="Dr. Hamza Raza" data-course-credits="3 Credit Hours" data-course-room="Room SE-110" data-course-progress="76%" data-course-next="Monday · 01:00 PM" data-course-assessment="Sprint planning review">
+                  <span>View Course</span><span aria-hidden="true">→</span>
+                </button>
+              </article>
+            </div>
+
+            <p class="course-no-results" data-no-results hidden>No courses match your current search and filter.</p>
+          </section>
+
+          <div class="course-modal" data-course-modal hidden aria-hidden="true">
+            <div class="modal-overlay" data-modal-close></div>
+            <section class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-course-title">
+              <button class="modal-close" data-modal-close type="button" aria-label="Close course details">×</button>
+              <p class="modal-course-code" data-modal-code>CS-312</p>
+              <h2 id="modal-course-title" data-modal-title>Web Technologies</h2>
+              <p class="modal-course-instructor" data-modal-instructor>Dr. Noman Shafi</p>
+
+              <dl class="modal-details">
+                <div><dt>Credit hours</dt><dd data-modal-credits>3 Credit Hours</dd></div>
+                <div><dt>Room</dt><dd data-modal-room>Room CS-301</dd></div>
+                <div><dt>Current progress</dt><dd data-modal-progress>72%</dd></div>
+                <div><dt>Next class</dt><dd data-modal-next>Monday · 09:00 AM</dd></div>
+              </dl>
+
+              <div class="modal-assessment">
+                <span>Upcoming assessment</span>
+                <strong data-modal-assessment>Responsive portfolio checkpoint</strong>
+              </div>
+            </section>
+          </div>
         </main>
 
         <footer class="app-footer">
