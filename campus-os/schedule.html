@@ -7,17 +7,93 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js" defer></script>
   </head>
-  <body>
-    <header>
-      <p>Header placeholder</p>
-    </header>
+  <body data-page="schedule">
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="CampusOS sidebar">
+        <a class="brand" href="index.html" aria-label="CampusOS overview">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-word">CAMPUS<span>.OS</span></span>
+        </a>
 
-    <main>
-      <h1>CampusOS Schedule</h1>
-    </main>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <p class="nav-section-label">Workspace</p>
+          <a class="nav-link" data-page-link="overview" href="index.html">
+            <span class="nav-mark nav-mark-overview" aria-hidden="true"></span>
+            <span>Overview</span>
+          </a>
+          <a class="nav-link" data-page-link="courses" href="courses.html">
+            <span class="nav-mark nav-mark-courses" aria-hidden="true"></span>
+            <span>Courses</span>
+          </a>
+          <a class="nav-link" data-page-link="schedule" href="schedule.html">
+            <span class="nav-mark nav-mark-schedule" aria-hidden="true"></span>
+            <span>Schedule</span>
+          </a>
+          <a class="nav-link" data-page-link="tasks" href="tasks.html">
+            <span class="nav-mark nav-mark-tasks" aria-hidden="true"></span>
+            <span>Tasks</span>
+          </a>
+          <a class="nav-link" data-page-link="analytics" href="analytics.html">
+            <span class="nav-mark nav-mark-analytics" aria-hidden="true"></span>
+            <span>Analytics</span>
+          </a>
+        </nav>
 
-    <footer>
-      <p>Footer placeholder</p>
-    </footer>
+        <div class="sidebar-bottom">
+          <button class="sidebar-action" type="button">
+            <span class="settings-mark" aria-hidden="true"></span>
+            <span>Settings</span>
+          </button>
+
+          <div class="profile-preview">
+            <span class="profile-avatar" aria-hidden="true">AS</span>
+            <span class="profile-copy">
+              <strong>Alex Student</strong>
+              <span>Undergraduate</span>
+            </span>
+            <span class="online-indicator" aria-label="Online"></span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="app-frame">
+        <header class="topbar">
+          <div class="topbar-heading">
+            <span class="topbar-overline">Campus workspace</span>
+            <span class="page-label" data-page-label>Schedule</span>
+          </div>
+
+          <div class="topbar-actions">
+            <label class="search-field">
+              <span class="visually-hidden">Search CampusOS</span>
+              <span class="search-mark" aria-hidden="true"></span>
+              <input type="search" placeholder="Search workspace" autocomplete="off">
+            </label>
+
+            <button class="notification-button" type="button" aria-label="View notifications">
+              <span>Notifications</span>
+              <span class="notification-dot" aria-hidden="true"></span>
+            </button>
+
+            <button class="theme-toggle" data-theme-toggle type="button" aria-pressed="false">
+              <span class="theme-indicator" aria-hidden="true"></span>
+              <span data-theme-label>Dark mode</span>
+            </button>
+
+            <button class="top-avatar" type="button" aria-label="Open user profile">AS</button>
+          </div>
+        </header>
+
+        <main class="page-content">
+          <p class="page-kicker">CampusOS / Workspace</p>
+          <h1>Schedule</h1>
+        </main>
+
+        <footer class="app-footer">
+          <span>CampusOS foundation</span>
+          <span>Student workspace</span>
+        </footer>
+      </div>
+    </div>
   </body>
 </html>
