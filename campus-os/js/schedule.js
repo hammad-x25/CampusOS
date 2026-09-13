@@ -3,6 +3,7 @@
 // ========================
 
 const schedulePage = document.querySelector('[data-schedule-page]');
+const scheduleCampus = window.CampusOS || (window.CampusOS = {});
 
 if (schedulePage) {
   const dayNames = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
@@ -110,13 +111,17 @@ if (schedulePage) {
 
   function openScheduleModal(classTrigger) {
     lastClassTrigger = classTrigger;
-    modalTitle.textContent = classTrigger.dataset.classTitle;
-    modalCode.textContent = classTrigger.dataset.classCode;
+    const sharedCourse = scheduleCampus.data.courses.find((course) => course.code === classTrigger.dataset.classCode);
+
+    modalTitle.textContent = sharedCourse?.title || classTrigger.dataset.classTitle;
+    modalCode.textContent = sharedCourse?.code || classTrigger.dataset.classCode;
     modalTime.textContent = classTrigger.dataset.classTime;
     modalRoom.textContent = classTrigger.dataset.classRoom;
-    modalInstructor.textContent = classTrigger.dataset.classInstructor;
+    modalInstructor.textContent = sharedCourse?.instructor || classTrigger.dataset.classInstructor;
     modalTopic.textContent = classTrigger.dataset.classTopic;
-    modalAttendance.textContent = classTrigger.dataset.classAttendance;
+    modalAttendance.textContent = sharedCourse
+      ? `${sharedCourse.attendance.attended} / ${sharedCourse.attendance.total} classes`
+      : classTrigger.dataset.classAttendance;
 
     scheduleModal.hidden = false;
     scheduleModal.setAttribute('aria-hidden', 'false');
